@@ -7,14 +7,14 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
     requirements = [line.strip() for line in fh if line.strip() and not line.startswith("#")]
 
 setup(
-    name="algo-trading",
+    name="quantml-trader",
     version="2.0.0",
-    author="Your Name",
-    author_email="your.email@example.com",
-    description="Production-ready algorithmic trading system with ML-based prediction and event-based backtesting",
+    author="Shiong Tan",
+    author_email="shiong.tan@example.com",
+    description="Production-ready quantitative ML trading system with comprehensive risk management and backtesting",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/algo-trading",
+    url="https://github.com/shiong-tan/quantml-trader",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -44,7 +44,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "algo-trading=algo_trading.cli:main",
+            "quantml-trader=algo_trading.cli:main",
         ],
     },
 )

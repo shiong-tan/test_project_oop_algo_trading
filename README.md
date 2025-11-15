@@ -1,6 +1,6 @@
-# Production-Ready Algorithmic Trading System
+# QuantML Trader
 
-A comprehensive, modular Python package for ML-based algorithmic trading with enterprise-grade risk management, backtesting, and performance analysis.
+A comprehensive, production-ready quantitative ML trading system with enterprise-grade risk management, backtesting, and performance analysis.
 
 ## 🎯 Overview
 
@@ -48,8 +48,8 @@ This system transforms a basic prediction-based trading strategy into a producti
 
 ```bash
 # Clone repository
-git clone https://github.com/shiong-tan/test_project_oop_algo_trading.git
-cd test_project_oop_algo_trading
+git clone https://github.com/shiong-tan/quantml-trader.git
+cd quantml-trader
 
 # Install package
 pip install -e .
@@ -380,8 +380,8 @@ MIT License - see LICENSE file for details
 ## 📧 Contact
 
 For issues or questions:
-- GitHub Issues: https://github.com/shiong-tan/test_project_oop_algo_trading/issues
-- Review documentation in `/docs` folder
+- GitHub Issues: https://github.com/shiong-tan/quantml-trader/issues
+- Review documentation in project folder
 
 ## 🙏 Acknowledgments
 

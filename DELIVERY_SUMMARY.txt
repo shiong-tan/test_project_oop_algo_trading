@@ -4,7 +4,7 @@ RISK MANAGEMENT SYSTEM - COMPREHENSIVE DELIVERY PACKAGE
 
 PROJECT: ML-Based Equity Trading Strategy with Risk Management
 DATE: November 15, 2025
-LOCATION: /Users/shiongtan/projects/test_project_oop_algo_trading/
+LOCATION: quantml-trader/
 
 ================================================================================
 PROBLEM STATEMENT
@@ -214,7 +214,7 @@ FILE LOCATIONS
 ================================================================================
 
 All files located in:
-  /Users/shiongtan/projects/test_project_oop_algo_trading/
+  quantml-trader/
 
 Core files:
   - README_RISK_MANAGEMENT.md (start here)
@@ -369,7 +369,7 @@ FILE MANIFEST
 Created: 2025-11-15
 Modified: 2025-11-15
 
-Files in /Users/shiongtan/projects/test_project_oop_algo_trading/:
+Files in quantml-trader/:
 
 DOCUMENTATION (189 KB total):
   ✓ README_RISK_MANAGEMENT.md (8 KB)

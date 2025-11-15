@@ -214,7 +214,7 @@ Total study time: 4-6 hours
 ### Step 1: Copy Implementation File (5 min)
 ```bash
 # Already in your project directory:
-# /Users/shiongtan/projects/test_project_oop_algo_trading/risk_management_implementation.py
+# quantml-trader/risk_management_implementation.py
 
 # Verify it works:
 python -c "from risk_management_implementation import FixedFractionalSizer; print('OK')"
@@ -383,7 +383,7 @@ See RISK_MANAGEMENT_CHEAT_SHEET.md trade rejection reasons
 ## Files Organization
 
 ```
-/Users/shiongtan/projects/test_project_oop_algo_trading/
+quantml-trader/
 ├── README_RISK_MANAGEMENT.md (THIS FILE)
 │
 ├── RISK_MANAGEMENT_FRAMEWORK.md (theory + specifications)

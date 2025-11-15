@@ -10,7 +10,7 @@ This document tracks the improvement effort for the OOP Algorithmic Trading proj
 ## Current State (Completed)
 
 ### ✅ Repository Cloned
-- Repository cloned to: `/Users/shiongtan/projects/test_project_oop_algo_trading`
+- Repository cloned to: `quantml-trader`
 - Original implementation: Single Jupyter notebook `test_project_prediction-based_trading_oop.ipynb`
 
 ### ✅ Codebase Analysis
