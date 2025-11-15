@@ -1,0 +1,186 @@
+# Trading System Configuration
+
+# Data Configuration
+data:
+  source_url: "http://hilpisch.com/ref_eikon_eod_data.csv"
+  symbol: "AAPL.O"
+  max_rows: 1000  # Limit for initial data (null for all data)
+  cache_dir: "./data/cache"
+
+# Feature Engineering
+features:
+  # Moving averages
+  sma_short_window: 20
+  sma_long_window: 60
+  ewma_short_halflife: 20
+  ewma_long_halflife: 60
+
+  # Volatility
+  volatility_short_window: 20
+  volatility_long_window: 60
+
+  # Additional technical indicators
+  rsi_period: 14
+  bollinger_period: 20
+  bollinger_std: 2
+
+  # Lagged features
+  n_lags: 5
+
+  # Remove features that cause data leakage
+  exclude_features:
+    - "d"      # Current direction (leakage)
+    - "d_"     # Discretized returns (leakage)
+
+# Model Configuration
+models:
+  # Train-test split
+  test_size: 0.3
+  random_seed: 42
+  shuffle: false  # Preserve time order
+
+  # Model registry
+  available_models:
+    logreg:
+      type: "LogisticRegression"
+      params:
+        C: 1.0
+        solver: "lbfgs"
+        max_iter: 1000
+        class_weight: "balanced"  # Handle class imbalance
+
+    rf:  # Random Forest (recommended)
+      type: "RandomForestClassifier"
+      params:
+        n_estimators: 100
+        max_depth: 10
+        min_samples_split: 5
+        class_weight: "balanced"
+        random_state: 42
+
+    xgb:  # XGBoost (best performance)
+      type: "XGBClassifier"
+      params:
+        n_estimators: 100
+        max_depth: 5
+        learning_rate: 0.1
+        scale_pos_weight: 1  # Adjust for class imbalance
+        random_state: 42
+
+    lgbm:  # LightGBM (fast)
+      type: "LGBMClassifier"
+      params:
+        n_estimators: 100
+        max_depth: 5
+        learning_rate: 0.1
+        class_weight: "balanced"
+        random_state: 42
+
+  # Hyperparameter tuning
+  hyperparameter_tuning:
+    enabled: false
+    method: "RandomizedSearchCV"  # or "GridSearchCV"
+    cv_splits: 5
+    n_iter: 20  # For RandomizedSearchCV
+
+# Cross-Validation
+cross_validation:
+  method: "TimeSeriesSplit"  # Walk-forward validation
+  n_splits: 5
+  test_size: 50  # Days in each test period
+
+# Backtesting Configuration
+backtesting:
+  initial_capital: 10000
+  transaction_cost: 0.0015  # 0.15% (realistic for retail)
+  slippage_bps: 5  # 5 basis points
+
+  # Execution parameters
+  verbose: false
+  log_trades: true
+  log_file: "./logs/backtest.log"
+
+# Risk Management
+risk_management:
+  # Position sizing
+  position_sizing:
+    method: "fixed_fractional"  # Options: fixed_fractional, kelly, confidence_based
+    risk_per_trade: 0.01  # 1% of capital per trade
+    max_position_size: 0.25  # Maximum 25% of capital in single position
+    kelly_fraction: 0.25  # Use 25% of Kelly (conservative)
+
+  # Stop loss
+  stop_loss:
+    enabled: true
+    hard_stop_pct: 0.03  # 3% stop loss
+    trailing_stop_pct: 0.02  # 2% trailing stop
+    take_profit_pct: 0.05  # 5% take profit
+    time_stop_days: 30  # Exit after 30 days
+
+  # Portfolio limits
+  portfolio:
+    max_drawdown_pct: 0.15  # 15% maximum drawdown
+    daily_loss_limit_pct: 0.03  # 3% daily loss limit
+    max_portfolio_heat: 0.03  # 3% total risk exposure
+
+  # Drawdown zones
+  drawdown_zones:
+    normal: 0.05  # 0-5% drawdown
+    caution: 0.10  # 5-10% drawdown
+    alert: 0.15  # 10-15% drawdown
+    emergency: 0.20  # >15% drawdown (halt trading)
+
+# Strategy Configuration
+strategy:
+  type: "MLPredictionStrategy"
+  confidence_threshold: 0.55  # Minimum prediction probability to trade
+  min_trades_required: 10  # Minimum trades for valid backtest
+
+  # Trade validation
+  trade_validation:
+    enabled: true
+    checks:
+      - "balance_check"
+      - "position_limit_check"
+      - "confidence_check"
+      - "drawdown_check"
+      - "portfolio_heat_check"
+
+# Performance Metrics
+metrics:
+  calculate:
+    - "total_return"
+    - "cagr"
+    - "sharpe_ratio"
+    - "sortino_ratio"
+    - "max_drawdown"
+    - "max_drawdown_duration"
+    - "calmar_ratio"
+    - "win_rate"
+    - "profit_factor"
+    - "r_expectancy"
+    - "var_95"
+    - "cvar_95"
+
+  risk_free_rate: 0.02  # 2% annual risk-free rate
+
+# Visualization
+visualization:
+  enabled: true
+  save_plots: true
+  plot_dir: "./plots"
+  plots:
+    - "equity_curve"
+    - "drawdown"
+    - "returns_distribution"
+    - "trade_analysis"
+    - "feature_importance"
+    - "confusion_matrix"
+    - "roc_curve"
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "./logs/trading_system.log"
+  console: true
